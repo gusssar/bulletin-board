@@ -5,11 +5,22 @@ import AdSubmit from '../AdSubmit/index.js';
 import AdList from '../AdList/index.js';
 
 class App extends Component {
-  render() {
+
+    state = {
+        addNewAd : 0
+    };
+
+    addNewAd = (value) => {this.setState({addNewAd : value})};
+
+    render() {
+
     return (
         <div>
-          <AdSubmit/>
-          <AdList/>
+          <AdSubmit updateData = {this.addNewAd}/>
+            <div style={{height:'50px'}}> </div>
+            <div>объявление</div>
+            <div style={{height:'50px'}}> </div>
+          <AdList addNewAd = {this.state.addNewAd}/>
         </div>
     );
   }

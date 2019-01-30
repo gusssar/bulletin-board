@@ -3,6 +3,7 @@ import './index.css';
 
 class AdSubmit extends Component {
     state ={
+        submitTime:'',
         subTitle:'',
         textArea:'',
         phoneNumber: '',
@@ -19,10 +20,13 @@ class AdSubmit extends Component {
 
     /**Сохранение в localStorage по клику*/
     onSubmit = () => {
+        let time =new Date().getTime();
+        this.setState({submitTime: time});
         console.log(this.state);
             let serialState = JSON.stringify(this.state);
-            localStorage.setItem('item',serialState);
-                console.log(localStorage.getItem('item'))
+            localStorage.setItem(time.toString(),serialState);
+                console.log(localStorage);
+        this.props.updateData(this.state.submitTime);
     };
 
     render() {
