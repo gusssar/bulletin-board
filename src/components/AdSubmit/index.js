@@ -78,10 +78,10 @@ class AdSubmit extends Component {
             <div>
                 <div>город</div>
                 <select name='input-city' onChange={this.onCityChange}>
-                    <option value='id-0'> </option>
-                    <option value='id-1'>москва</option>
-                    <option value='id-2'>санкт-петербург</option>
-                    <option value='id-3'>новосибирск</option>
+                    <option value='неизвестно'> </option>
+                    <option value='москва'>москва</option>
+                    <option value='санкт-петербург'>санкт-петербург</option>
+                    <option value='новосибирск'>новосибирск</option>
                 </select>
             </div>;
 

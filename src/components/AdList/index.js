@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './index.css';
-// import AdItem from '../AdItem/index';
+import AdItem from '../AdItem/index';
 
 class AdList extends Component {
 
@@ -26,11 +26,13 @@ class AdList extends Component {
 
 
 
-            console.log('JSON.parse(data[0] after unshift',JSON.parse(data[0]));
+            // console.log('JSON.parse(data[0] after unshift',JSON.parse(data[0]));
 
             /**Раскладываем кажжый элемент массива в строки (в будущем в отдельные шаблоны компонентов AdItem)*/
             const dataAdItem = data.map((data,index) =>
-                <li key={index}>{JSON.parse(data).submitTime}
+                <li key={index}>
+                    {/*{JSON.parse(data).submitTime}*/}
+                    {<AdItem data = {JSON.parse(data)}/>}
                 </li>
             );
 
