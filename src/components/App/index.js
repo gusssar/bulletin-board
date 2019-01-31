@@ -28,7 +28,7 @@ class App extends Component {
 
 
     return (
-        <div>
+        <div style={{width:614, margin: '48px auto'}}>
           <AdSubmit updateData = {this.addNewAd}/>
             <div style={{height:'50px'}}> </div>
             <div>объявление</div>

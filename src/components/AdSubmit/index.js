@@ -32,23 +32,23 @@ class AdSubmit extends Component {
     render() {
 
         const input_sub_title =
-            <div>
-                <div>заголовок</div>
+            <div className={'input-sub-title'}>
+                <div style={{'margin-top': '24px'}}>Заголовок</div>
                 <input type='text' className='sub-title' value={this.state.subTitle}
-                       maxLength={140} onChange={this.onSubTitleChange}/>
+                       maxLength={140}  style={{'margin-top': '8px'}} onChange={this.onSubTitleChange}/>
             </div>;
 
         const input_text_area =
-            <div>
-                <div>текст объявления</div>
-                <textarea className='text-area' value={this.state.textArea}
+            <div className={'input-sub-title'}>
+                <div style={{'margin-top': '29px'}}>Текст объявления</div>
+                <textarea className='text-area'  style={{'margin-top': '8px'}} value={this.state.textArea}
                           maxLength={300} onChange={this.onTextAreaChange}/>
             </div>;
 
         const input_phone =
-            <div>
-                <div>телефон</div>
-                <input type='tel' name='phone'
+            <div className={'input-sub-title'}>
+                <div style={{'margin-top': '29px'}}>Телефон</div>
+                <input type='tel' name='phone' style={{'margin-top': '8px'}}
                        placeholder='+7(___)-___-__-__'
                        value={this.state.phoneNumber}
                        onChange={this.onPhoneNumberChange}
@@ -75,19 +75,21 @@ class AdSubmit extends Component {
 
 
         const input_city =
-            <div>
-                <div>город</div>
-                <select name='input-city' onChange={this.onCityChange}>
+            <div className={'input-sub-title'}>
+                <div style={{'margin-top': '28px'}}>Город</div>
+                <select name='input-city' style={{'margin-top': '12px'}} onChange={this.onCityChange}>
+                    {/*этого тут не должно быть*/}
                     <option value='неизвестно'> </option>
-                    <option value='москва'>москва</option>
-                    <option value='санкт-петербург'>санкт-петербург</option>
-                    <option value='новосибирск'>новосибирск</option>
+                    <option value='Москва'>Москва</option>
+                    <option value='Санкт-петербург'>Санкт-петербург</option>
+                    <option value='Новосибирск'>Новосибирск</option>
                 </select>
             </div>;
 
         /**разобраться как сохранять картинку в local.storage*/
         const input_image =
-            <div>
+            <div className={'fake-input'}>
+                <div style={{'margin-top': '32px'}}><div className={'fake-input-div'}>Прикрепить фото</div></div>
                 <input id='image' type='file' accept='image/*' name='input-photo'
                        value={this.state.imageData} onChange={this.onImageDataChange}/>
             </div>;
@@ -96,13 +98,13 @@ class AdSubmit extends Component {
 
         return (
             <div>
-                <div>подать объявление</div>
+                <div className={'title'}>Подать объявление</div>
                 {input_sub_title}
                 {input_text_area}
                 {input_phone}
                 {input_city}
                 {input_image}
-                <button onClick={this.onSubmit}>подать</button>
+                <button onClick={this.onSubmit}  style={{'margin-top': '32px'}}>Подать</button>
             </div>
         );
     }

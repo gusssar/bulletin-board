@@ -1,0 +1,162 @@
+.input-sub-title div{
+
+    /*width: 65px;*/
+    /*height: 22px;*/
+    font-family: SourceSansPro, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    color: #68717c;
+}
+
+.input-sub-title input{
+    margin-top: 8px;
+
+    width: 376px;
+    height: 16px;
+    padding: 9px 16px;
+    border-radius: 3px;
+    border: 1px solid #d4d8db;
+    background-color: rgba(27, 40, 52, 0.01);
+    box-shadow: inset 0 1px 3px 0 rgba(27, 40, 52, 0.08);
+
+    font-family: SourceSansPro, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #68717c;
+}
+
+.input-sub-title input::placeholder{
+    color: #68717c;
+}
+
+.input-sub-title textarea{
+    resize: none;
+
+    width: 376px;
+    height: 131px;
+    padding: 7px 16px;
+    object-fit: contain;
+    border-radius: 3px;
+    border: 1px solid #d4d8db;
+    background-color: rgba(27, 40, 52, 0.01);
+    box-shadow: inset 0 1px 3px 0 rgba(27, 40, 52, 0.08);
+
+    font-family: SourceSansPro, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #68717c;
+}
+
+.input-sub-title select{
+    width: 410px;
+    height: 36px;
+    border: 1px solid #d4d8db;
+    border-radius: 3px;
+    background: #ffffff url("combined-shape-copy-9.svg") 390px center no-repeat;
+    appearance: none;
+    padding: 8px 16px 10px;
+
+    font-family: SourceSansPro, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #68717c;
+}
+
+/*не работает*/
+option{
+    padding: 12px 15px;
+    background: red;
+
+    height: 42px !important;
+    font-family: SourceSansPro, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #68717c;
+}
+.fake-input{
+    position: relative;
+}
+.fake-input > div{
+    width: 178px;
+    height: 36px;
+    object-fit: contain;
+    border-radius: 3px;
+    border: 1px solid #2d74da;
+
+    background: url("clip_15x16.png") 22px center no-repeat ;
+
+    font-family: SourceSansPro,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2d74da;
+
+    vertical-align: center;
+}
+
+.fake-input-div{
+    float: right;
+    margin: 10px 22px;
+}
+
+.fake-input input{
+    position: absolute;
+    top:0;
+    left: 0;
+    opacity: 0;
+    width: 178px;
+    height: 36px;
+}
+
+
+.title{
+    font-family: SourceSansPro, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.58;
+    letter-spacing: normal;
+    color: #1b2834;
+}
+
+button{
+    width: 141px;
+    height: 36px;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 0 rgba(27, 40, 52, 0.16);
+    background-image: linear-gradient(to bottom, #2d74da, #2367c8);
+    border: 0;
+
+    font-family: SourceSansPro, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}
