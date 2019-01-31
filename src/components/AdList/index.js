@@ -1,42 +1,46 @@
 import React, { Component } from 'react';
 import './index.css';
+// import AdItem from '../AdItem/index';
 
 class AdList extends Component {
 
-
-
     render() {
-    console.log('this.props.addNewAd---',this.props.addNewAd);
-        if(this.props.addNewAd){
-
-            let time = JSON.parse(localStorage.getItem(this.props.addNewAd.toString()));
-            // console.log('JSON.parse(time)---',JSON.parse(time));
 
 
-            const adText =
-                <div>
-                    {time.subTitle}
-                    {time.textArea}
-                    {time.phoneNumber}
-                    {/*Дописать всё остальное*/}
-                </div>;
+    const {addNewAd} = this.props;//приходит время нового объявления
 
-            return (
-                <div>
+    console.log('const {addNewAd}---',addNewAd);
 
-                    {adText}
-                </div>
+            let time = JSON.parse(localStorage
+                .getItem(this.props.addNewAd.toString()));//достаём новый оъект из localStorage
+            console.log('JSON.parse',time);
+            console.log('localStorage',localStorage);
+
+            let data =[];
+
+            /**Ищем в localStorage все объявления и записываем их в массив (новый в начало)*/
+            for (let key in localStorage){
+                if(localStorage.getItem(key)){
+                    data.unshift(localStorage.getItem(key))}
+            }
+
+
+
+            console.log('JSON.parse(data[0] after unshift',JSON.parse(data[0]));
+
+            /**Раскладываем кажжый элемент массива в строки (в будущем в отдельные шаблоны компонентов AdItem)*/
+            const dataAdItem = data.map((data,index) =>
+                <li key={index}>{JSON.parse(data).submitTime}
+                </li>
             );
 
-        }else {
+            console.log('dataAdItem',dataAdItem);
 
             return (
-                <div>
-
-                </div>
+                <ul>
+                    {dataAdItem}
+                </ul>
             );
-
-        }
 
     }
 }

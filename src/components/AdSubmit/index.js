@@ -22,10 +22,10 @@ class AdSubmit extends Component {
     onSubmit = () => {
         let time =new Date().getTime();
         this.setState({submitTime: time});
-        console.log(this.state);
-            let serialState = JSON.stringify(this.state);
-            localStorage.setItem(time.toString(),serialState);
-                console.log(localStorage);
+        // console.log(this.state);
+            // let serialState = JSON.stringify(this.state);
+            localStorage.setItem(time.toString(),JSON.stringify(this.state));
+                // console.log(localStorage);
         this.props.updateData(this.state.submitTime);
     };
 
@@ -34,13 +34,15 @@ class AdSubmit extends Component {
         const input_sub_title =
             <div>
                 <div>заголовок</div>
-                <input type='text' className='sub-title' value={this.state.subTitle} maxLength={140} onChange={this.onSubTitleChange}/>
+                <input type='text' className='sub-title' value={this.state.subTitle}
+                       maxLength={140} onChange={this.onSubTitleChange}/>
             </div>;
 
         const input_text_area =
             <div>
                 <div>текст объявления</div>
-                <textarea className='text-area' value={this.state.textArea} maxLength={300} onChange={this.onTextAreaChange}/>
+                <textarea className='text-area' value={this.state.textArea}
+                          maxLength={300} onChange={this.onTextAreaChange}/>
             </div>;
 
         const input_phone =
@@ -86,7 +88,8 @@ class AdSubmit extends Component {
         /**разобраться как сохранять картинку в local.storage*/
         const input_image =
             <div>
-                <input id='image' type='file' accept='image/*' name='input-photo' value={this.state.imageData} onChange={this.onImageDataChange}/>
+                <input id='image' type='file' accept='image/*' name='input-photo'
+                       value={this.state.imageData} onChange={this.onImageDataChange}/>
             </div>;
 
 
