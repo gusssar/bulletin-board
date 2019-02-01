@@ -6,7 +6,7 @@ class AdItem extends Component {
     render() {
 
         const {data} = this.props;//принимаем объект объявления из AdList
-        console.log('class AdItem -> data ---',data);
+        // console.log('class AdItem -> data ---',data);
 
         const output_sub_title =<div>{data.subTitle}</div>;
         const output_text_area =<div>{data.textArea}</div>;
@@ -15,8 +15,8 @@ class AdItem extends Component {
             <div>{data.phoneNumber}
             </div>;
         const output_city =<div>{data.city}</div>;
-        const output_update = <div>Редактировать</div>
-        const output_delete = <div>Удалить</div>
+        const output_update = <div>Редактировать</div>;
+        const output_delete = <div>Удалить</div>;
 
             return (
                     <div id={'adItem'}>

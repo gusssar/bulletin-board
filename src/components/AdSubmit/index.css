@@ -1,3 +1,17 @@
+.input-sub-title{
+    position: relative;
+}
+#sub-title-decrip,
+#text-area-decrip,
+#phone-descrip{
+    position: absolute;
+    top: 38px;
+    left: 435px;
+    padding-left: 22px;
+    background: url("information.png") left 2px no-repeat;
+}
+
+
 .input-sub-title div{
 
     /*width: 65px;*/

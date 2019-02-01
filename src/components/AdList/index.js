@@ -9,12 +9,12 @@ class AdList extends Component {
 
     const {addNewAd} = this.props;//приходит время нового объявления
 
-    console.log('const {addNewAd}---',addNewAd);
+    // console.log('const {addNewAd}---',addNewAd);
 
             let time = JSON.parse(localStorage
                 .getItem(this.props.addNewAd.toString()));//достаём новый оъект из localStorage
-            console.log('JSON.parse',time);
-            console.log('localStorage',localStorage);
+            // console.log('JSON.parse',time);
+            // console.log('localStorage',localStorage);
 
             let data =[];
 
@@ -36,7 +36,7 @@ class AdList extends Component {
                 </div>
             );
 
-            console.log('dataAdItem',dataAdItem);
+            // console.log('dataAdItem',dataAdItem);
 
             return (
                 <div>
