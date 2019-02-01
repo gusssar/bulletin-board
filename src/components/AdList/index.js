@@ -28,20 +28,20 @@ class AdList extends Component {
 
             // console.log('JSON.parse(data[0] after unshift',JSON.parse(data[0]));
 
-            /**Раскладываем кажжый элемент массива в строки (в будущем в отдельные шаблоны компонентов AdItem)*/
+            /**Раскладываем кажжый элемент массива в отдельные шаблоны компонентов AdItem*/
             const dataAdItem = data.map((data,index) =>
-                <li key={index}>
+                <div key={index}>
                     {/*{JSON.parse(data).submitTime}*/}
                     {<AdItem data = {JSON.parse(data)}/>}
-                </li>
+                </div>
             );
 
             console.log('dataAdItem',dataAdItem);
 
             return (
-                <ul>
+                <div>
                     {dataAdItem}
-                </ul>
+                </div>
             );
 
     }

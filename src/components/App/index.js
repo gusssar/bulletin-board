@@ -30,9 +30,9 @@ class App extends Component {
     return (
         <div style={{width:614, margin: '48px auto'}}>
           <AdSubmit updateData = {this.addNewAd}/>
-            <div style={{height:'50px'}}> </div>
-            <div>объявление</div>
-            <div style={{height:'50px'}}> </div>
+            {/*<div style={{height:'50px'}}> </div>*/}
+            <div className={'title-app'}>Объявление</div>
+            {/*<div style={{height:'50px'}}> </div>*/}
             <button onClick={this.onClear}>Clear</button>
           <AdList addNewAd = {this.state.addNewAd}/>
         </div>

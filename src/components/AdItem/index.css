@@ -1,0 +1,117 @@
+#adItem{
+    margin: 23px 0 55px;
+}
+
+#adItem > div{
+    display: inline-block;
+    vertical-align: top;
+}
+#adItem >div:nth-child(2){
+    position: relative;
+    margin-left: 100px;
+    height: 297px;
+}
+/**Заголовок*/
+#adItem div:nth-child(1) div:nth-child(1){
+    font-family: SourceSansPro;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    color: #1b2834;
+}
+/**Текст*/
+#adItem div:nth-child(1) div:nth-child(2){
+    margin-top: 2px;
+    max-width: 332px;
+
+    font-family: SourceSansPro;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    color: #68717c;
+}
+/**Изображение*/
+#adItem div:nth-child(1) div:nth-child(3){
+    margin-top: 6px;
+    border: 1px solid #68717c;
+    width: 332px;
+    height: 250px;
+}
+/**Телефон*/
+#adItem div:nth-child(2) div:nth-child(1){
+    padding-left: 25px;
+    background: url("phone.png") center left no-repeat;
+    margin-top: 5px;
+
+    font-family: SourceSansPro;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    color: #1b2834;
+}
+/**Город*/
+#adItem div:nth-child(2) div:nth-child(2){
+    padding-left: 25px;
+    background: url("maps.png") center left no-repeat;
+    margin-top: 14px;
+
+    font-family: SourceSansPro;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    color: #1b2834;
+}
+/**Редактировать*/
+#adItem div:nth-child(2) div:nth-child(3){
+    position: absolute;
+    bottom: 50px;
+
+    width: 178px;
+    height: 28px;
+    border: 1px solid #2d74da;
+    border-radius: 3px;
+    text-align: center;
+    padding-top: 8px;
+
+    font-family: SourceSansPro;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2d74da;
+}
+/**Удалить*/
+#adItem div:nth-child(2) div:nth-child(4){
+    position: absolute;
+    bottom: 0;
+
+    width: 178px;
+    height: 28px;
+    border: 1px solid #fa5e5b;
+    border-radius: 3px;
+    text-align: center;
+    padding-top: 8px;
+
+    font-family: SourceSansPro;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #fa5e5b;
+}
