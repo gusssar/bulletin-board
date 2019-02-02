@@ -127,6 +127,7 @@ class AdSubmit extends Component {
 
     };
 
+    /**Проверка заполненности обязательных полей перед отправкой*/
     /**Сохранение в localStorage по клику*/
     onSubmit = () => {
         let time = new Date().getTime().toString();
@@ -135,20 +136,23 @@ class AdSubmit extends Component {
             const statePhoneNumber = this.state.phoneNumber.search(/\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}/)+1;
 
             if (stateSubTitle!==''&&statePhoneNumber!==0){
-                this.setState({emptyTitle:'',emptyPhone:''});
+                this.setState({emptyTitle:'',emptyPhone:''});//всё заполнено
+                console.log(this.state);
+                localStorage.setItem(time,JSON.stringify(this.state));
+                this.props.updateData(this.state.submitTime);
             }else {
                 if (stateSubTitle!==''&&statePhoneNumber===0){
-                    this.setState({emptyTitle:'',emptyPhone:'1'});
+                    this.setState({emptyTitle:'',emptyPhone:'1'});//не заполнен телефон
                     }else
                         if(stateSubTitle===''&&statePhoneNumber!==0){
-                            this.setState({emptyTitle:'1',emptyPhone:''});
+                            this.setState({emptyTitle:'1',emptyPhone:''});//не заполнен титул
                         }else
                             if(stateSubTitle===''&&statePhoneNumber===0){
-                                this.setState({emptyTitle:'1',emptyPhone:'1'});
+                                this.setState({emptyTitle:'1',emptyPhone:'1'});//ничего не заполненно
                             }
             }
             console.log(this.state);
-            localStorage.setItem(time,JSON.stringify(this.state));
+            // localStorage.setItem(time,JSON.stringify(this.state));
             //     console.log('localStorage---',localStorage);
             /**передача в AdList*/
             // this.props.updateData(this.state.submitTime);
