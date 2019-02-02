@@ -10,7 +10,9 @@ class AdSubmit extends Component {
         city: '',
         imageData: '',
         onBlurSubTitle:'',
-        onBlurPhoneNumber:''
+        onBlurPhoneNumber:'',
+        emptyTitle:'',
+        emptyPhone:''
     };
 
 
@@ -102,39 +104,57 @@ class AdSubmit extends Component {
         const empty = /^\+7\s\($/;
                 if (this.state.phoneNumber.search(full)+1){
                     this.setState({onBlurPhoneNumber: 2});
-                    console.log('onBlurPhoneNumber: 2')
+                    // console.log('onBlurPhoneNumber: 2')
                 } else {
                     if (this.state.phoneNumber.search(empty)+1){
                         this.setState({phoneNumber: ''});
                         this.setState({onBlurPhoneNumber: 0});
-                        console.log('onBlurPhoneNumber: 0')
+                        // console.log('onBlurPhoneNumber: 0')
                     } else {
                         this.setState({onBlurPhoneNumber: 1});
-                        console.log('onBlurPhoneNumber: 1')
+                        // console.log('onBlurPhoneNumber: 1')
                     }
-
-
                 }
 
     };
-    /**дописать грамотную фокусировку без удаления содержимого */
+
     onFocusPhoneNumberChange = () => {
             this.setState({onBlurPhoneNumber: 3});
-            this.setState({phoneNumber: '+7 ('});
+            // console.log('this.state.phoneNumber--',this.state.phoneNumber);
+            if(!this.state.phoneNumber){
+                this.setState({phoneNumber: '+7 ('});
+            }
+
     };
 
     /**Сохранение в localStorage по клику*/
     onSubmit = () => {
         let time = new Date().getTime().toString();
-        this.setState({submitTime: time});
-        // console.log('time---',time);
-        // console.log('this.state---',this.state);
+        this.setState({submitTime: time}, () =>{
+            const stateSubTitle = this.state.subTitle;
+            const statePhoneNumber = this.state.phoneNumber.search(/\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}/)+1;
 
-            // let serialState = JSON.stringify(this.state);
+            if (stateSubTitle!==''&&statePhoneNumber!==0){
+                this.setState({emptyTitle:'',emptyPhone:''});
+            }else {
+                if (stateSubTitle!==''&&statePhoneNumber===0){
+                    this.setState({emptyTitle:'',emptyPhone:'1'});
+                    }else
+                        if(stateSubTitle===''&&statePhoneNumber!==0){
+                            this.setState({emptyTitle:'1',emptyPhone:''});
+                        }else
+                            if(stateSubTitle===''&&statePhoneNumber===0){
+                                this.setState({emptyTitle:'1',emptyPhone:'1'});
+                            }
+            }
+            console.log(this.state);
             localStorage.setItem(time,JSON.stringify(this.state));
-                console.log('localStorage---',localStorage);
-        /**передача в AdList*/
-        this.props.updateData(this.state.submitTime);
+            //     console.log('localStorage---',localStorage);
+            /**передача в AdList*/
+            // this.props.updateData(this.state.submitTime);
+        });
+
+
     };
 
     render() {
@@ -159,10 +179,12 @@ class AdSubmit extends Component {
                             <div>Не более 140 символов</div>
                         </div>;
 
+        const style_input = (this.state.emptyTitle)?{marginTop: '8px', border: '1px solid #fa5e5b'}:{marginTop: '8px'};
         const input_sub_title = <div className={'input-sub-title'}>
                 <div style={{marginTop: '24px'}}>Заголовок</div>
+
                 <input type='text' className='sub-title' value={this.state.subTitle}
-                       maxLength={140}  style={{marginTop: '8px'}}
+                       maxLength={140}  style={style_input}
                        onChange={this.onSubTitleChange}
                        onBlur={this.onBlurSubTitleChange}
                        onFocus={this.onFocusSubTitleChange}
@@ -200,11 +222,11 @@ class AdSubmit extends Component {
                 <div>Обзятельное поле</div>
             </div>;
 
-
+        const style_phone = (this.state.emptyPhone)?{marginTop: '8px', border: '1px solid #fa5e5b'}:{marginTop: '8px'};
         const input_phone =
             <div className={'input-sub-title'}>
                 <div style={{marginTop: '29px'}}>Телефон</div>
-                <input type='tel' name='phone' style={{marginTop: '8px'}}
+                <input type='tel' name='phone' style={style_phone}
                        placeholder='+7(___)-___-__-__'
                        value={this.state.phoneNumber}
                        onChange={this.onPhoneNumberChange}
