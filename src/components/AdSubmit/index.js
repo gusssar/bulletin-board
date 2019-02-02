@@ -8,17 +8,119 @@ class AdSubmit extends Component {
         textArea:'',
         phoneNumber: '',
         city: '',
-        imageData: ''
+        imageData: '',
+        onBlurSubTitle:'',
+        onBlurPhoneNumber:''
     };
 
 
     onSubTitleChange = event => {this.setState({subTitle: event.target.value}); /*console.log('---onSubTitleChange---')*/};
     onTextAreaChange = event => {this.setState({textArea: event.target.value}); /*console.log('---onTextAreaChange---')*/};
-    onPhoneNumberChange = event => {this.setState({phoneNumber: event.target.value});/* console.log('---onPhoneNumberChange---')*/};
+    onPhoneNumberChange = (event) => {
+        // console.log('event.target.value---',event.target.value);
+        // console.log('event.target.value.length---',event.target.value.length);
+        // console.log('event.target.value[5]---',event.target.value[4]);
+
+        /**Проверка на ввод цифр, если isNaN, удаляем знак
+         * состоит из 4-х блоков из-за присутсвия '+',' ','(',')','-'*/
+        for (let i=4; i<7; i++){
+            if (isNaN(event.target.value[i])){
+                // console.log('Не число!!!');
+                event.target.value = event.target.value.substring(0,i);
+            }
+        }
+        for (let i=9; i<12; i++){
+            if (isNaN(event.target.value[i])){
+                // console.log('Не число!!!');
+                event.target.value = event.target.value.substring(0,i);
+            }
+        }
+        for (let i=13; i<15; i++){
+            if (isNaN(event.target.value[i])){
+                // console.log('Не число!!!');
+                event.target.value = event.target.value.substring(0,i);
+            }
+        }
+        for (let i=16; i<18; i++){
+            if (isNaN(event.target.value[i])){
+                // console.log('Не число!!!');
+                event.target.value = event.target.value.substring(0,i);
+            }
+        }
+
+        /**Набор регулярных выражений для добавления спец знаков при вводе телефона*/
+        this.setState({phoneNumber: event.target.value},() => {
+            const full        = /\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}/;
+            const third_done  = /\+7\s\(\d{3}\)\s\d{3}-\d{2}-/;
+            const third       = /\+7\s\(\d{3}\)\s\d{3}-\d{2}/;
+            const second_done = /\+7\s\(\d{3}\)\s\d{3}-/;
+            const second      = /\+7\s\(\d{3}\)\s\d{3}/;
+            const first_done  = /\+7\s\(\d{3}\)\s/;
+            const first       = /\+7\s\(\d{3}/;
+
+            if (this.state.phoneNumber.search(full)+1){
+                // console.log('---аеее---');
+
+            }else
+                if(this.state.phoneNumber.search(third)+1){
+                    if (this.state.phoneNumber.search(third_done)+1){}
+                        else
+                            {this.setState({phoneNumber: this.state.phoneNumber +'-'},() => {
+                                // console.log('this.state.phoneNumber.3',this.state.phoneNumber)
+                                });
+                            }
+                } else
+                    if (this.state.phoneNumber.search(second)+1){
+                        if (this.state.phoneNumber.search(second_done)+1){}
+                            else
+                                {this.setState({phoneNumber: this.state.phoneNumber +'-'},() => {
+                                     // console.log('this.state.phoneNumber.2',this.state.phoneNumber)
+                                });
+                                }
+                    } else
+                        if (this.state.phoneNumber.search(first)+1){
+                            if (this.state.phoneNumber.search(first_done)+1){
+                                // console.log('this.state.phoneNumber.search(first_done)+1');
+                            }
+                                else
+                                            {this.setState({phoneNumber: this.state.phoneNumber +') '},() => {
+                                                // console.log('this.state.phoneNumber.1',this.state.phoneNumber)
+                                            });
+                                            }
+
+                        }
+        });
+    };
+
     onCityChange = event => this.setState({city: event.target.value});
     onImageDataChange = event => this.setState({imageData: event.target.value});
-    onBlurChange = (event) => {
-        if (!event.target.value){console.log('---onBlurChange---')} //доделать слушателя ДизФокуса!!!!
+
+    onBlurSubTitleChange = () => this.setState({onBlurSubTitle: 1});
+    onFocusSubTitleChange = () => this.setState({onBlurSubTitle: ''});
+    onBlurPhoneNumberChange = () => {
+        const full = /\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}/;
+        const empty = /^\+7\s\($/;
+                if (this.state.phoneNumber.search(full)+1){
+                    this.setState({onBlurPhoneNumber: 2});
+                    console.log('onBlurPhoneNumber: 2')
+                } else {
+                    if (this.state.phoneNumber.search(empty)+1){
+                        this.setState({phoneNumber: ''});
+                        this.setState({onBlurPhoneNumber: 0});
+                        console.log('onBlurPhoneNumber: 0')
+                    } else {
+                        this.setState({onBlurPhoneNumber: 1});
+                        console.log('onBlurPhoneNumber: 1')
+                    }
+
+
+                }
+
+    };
+    /**дописать грамотную фокусировку без удаления содержимого */
+    onFocusPhoneNumberChange = () => {
+            this.setState({onBlurPhoneNumber: 3});
+            this.setState({phoneNumber: '+7 ('});
     };
 
     /**Сохранение в localStorage по клику*/
@@ -36,22 +138,36 @@ class AdSubmit extends Component {
     };
 
     render() {
-               // console.log('---input_sub_title---');
         /**Проверка валидности Заголовка*/
-        const sub_title_decrip = (this.state.subTitle)?
-            <div id={'sub-title-decrip'}>
-            </div> :
-            <div id={'sub-title-decrip'}>
-                <div>Обзятельное поле</div>
-                <div>Не более 140 символов</div>
-            </div>;
+        const sub_title_descrip =
+                (this.state.onBlurSubTitle)?
+                    (this.state.subTitle)?
+                        <div id={'sub-title-decrip-done'}>
+                            Заполнено
+                        </div>
+                    :
+                        <div id={'sub-title-decrip-exclam'}>
+                            Заполните поле
+                        </div>
+                :
+                    (this.state.subTitle)?
+                        <div id={'sub-title-decrip-hidden'}>
+                        </div>
+                    :
+                        <div id={'sub-title-decrip-info'}>
+                            <div>Обзятельное поле</div>
+                            <div>Не более 140 символов</div>
+                        </div>;
 
         const input_sub_title = <div className={'input-sub-title'}>
                 <div style={{marginTop: '24px'}}>Заголовок</div>
                 <input type='text' className='sub-title' value={this.state.subTitle}
                        maxLength={140}  style={{marginTop: '8px'}}
-                       onChange={this.onSubTitleChange} onBlur={this.onBlurChange} autoFocus/>
-                {sub_title_decrip}
+                       onChange={this.onSubTitleChange}
+                       onBlur={this.onBlurSubTitleChange}
+                       onFocus={this.onFocusSubTitleChange}
+                       autoFocus/>
+                {sub_title_descrip}
             </div>;
 
         // console.log('---input_text_area---');
@@ -68,12 +184,23 @@ class AdSubmit extends Component {
 
         // console.log('---input_phone---');
         /**Проверка валидности Телефона*/
-        const phone_descrip = (this.state.phoneNumber)?
-            <div id={'phone-descrip'}>
-            </div>:
-            <div id={'phone-descrip'}>
+        const phone_descrip =
+            (this.state.onBlurPhoneNumber)?
+                (this.state.onBlurPhoneNumber-1)?
+                    (this.state.onBlurPhoneNumber-2)?
+                        <div id={'sub-title-decrip-hidden'}>
+                        </div>:
+                    <div id={'sub-title-decrip-done'}>
+                        Заполнено
+                    </div>:
+                <div id={'sub-title-decrip-exclam'}>
+                    Заполните поле
+                </div>:
+            <div id={'sub-title-decrip-info'}>
                 <div>Обзятельное поле</div>
             </div>;
+
+
         const input_phone =
             <div className={'input-sub-title'}>
                 <div style={{marginTop: '29px'}}>Телефон</div>
@@ -81,6 +208,9 @@ class AdSubmit extends Component {
                        placeholder='+7(___)-___-__-__'
                        value={this.state.phoneNumber}
                        onChange={this.onPhoneNumberChange}
+                       onBlur={this.onBlurPhoneNumberChange}
+                       onFocus={this.onFocusPhoneNumberChange}
+                       maxLength={18}
                        required/>
                 {phone_descrip}
             </div>;

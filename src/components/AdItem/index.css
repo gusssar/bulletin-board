@@ -1,5 +1,6 @@
 #adItem{
     margin: 23px 0 55px;
+    position: relative;
 }
 
 #adItem > div{
@@ -7,7 +8,7 @@
     vertical-align: top;
 }
 #adItem >div:nth-child(2){
-    position: relative;
+    /*position: relative;*/
     margin-left: 100px;
     height: 297px;
 }
@@ -21,11 +22,14 @@
     line-height: 1.22;
     letter-spacing: normal;
     color: #1b2834;
+    max-width: 332px;
+    word-wrap: break-word;
 }
 /**Текст*/
 #adItem div:nth-child(1) div:nth-child(2){
     margin-top: 2px;
     max-width: 332px;
+    word-wrap: break-word;
 
     font-family: SourceSansPro;
     font-size: 14px;
@@ -74,9 +78,10 @@
     color: #1b2834;
 }
 /**Редактировать*/
-#adItem div:nth-child(2) div:nth-child(3){
+#adItem > div:nth-child(3){
     position: absolute;
     bottom: 50px;
+    left: 435px;
 
     width: 178px;
     height: 28px;
@@ -95,9 +100,10 @@
     color: #2d74da;
 }
 /**Удалить*/
-#adItem div:nth-child(2) div:nth-child(4){
+#adItem > div:nth-child(4){
     position: absolute;
     bottom: 0;
+    left: 435px;
 
     width: 178px;
     height: 28px;

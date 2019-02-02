@@ -1,9 +1,41 @@
 .input-sub-title{
     position: relative;
 }
-#sub-title-decrip,
 #text-area-decrip,
 #phone-descrip{
+    position: absolute;
+    top: 38px;
+    left: 435px;
+    padding-left: 22px;
+    background: url("information.png") left 2px no-repeat;
+}
+/*Заполнено*/
+#sub-title-decrip-done{
+    position: absolute;
+    top: 38px;
+    left: 435px;
+    padding-left: 22px;
+    color: #16c98d;
+    background: url("success.png") left 2px no-repeat;
+}
+/*Заполните поле*/
+#sub-title-decrip-exclam{
+    position: absolute;
+    top: 38px;
+    left: 435px;
+    padding-left: 22px;
+    color: #fa5e5b;
+    background: url("exclamation-mark.png") left 2px no-repeat;
+}
+/*Пусто*/
+#sub-title-decrip-hidden{
+    position: absolute;
+    top: 38px;
+    left: 435px;
+    padding-left: 22px;
+}
+/*Обязательное поле*/
+#sub-title-decrip-info{
     position: absolute;
     top: 38px;
     left: 435px;
@@ -34,6 +66,7 @@
     padding: 9px 16px;
     border-radius: 3px;
     border: 1px solid #d4d8db;
+    /*border: 1px solid red;*/
     background-color: rgba(27, 40, 52, 0.01);
     box-shadow: inset 0 1px 3px 0 rgba(27, 40, 52, 0.08);
 

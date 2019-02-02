@@ -28,9 +28,9 @@ class AdItem extends Component {
                         <div>
                             {output_phone_number}
                             {output_city}
-                            {output_update}
-                            {output_delete}
                         </div>
+                        {output_update}
+                        {output_delete}
                     </div>
             );
     }
