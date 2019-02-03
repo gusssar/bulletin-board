@@ -8,7 +8,6 @@
     vertical-align: top;
 }
 #adItem >div:nth-child(2){
-    /*position: relative;*/
     margin-left: 100px;
     height: 297px;
 }
@@ -43,14 +42,16 @@
 /**Изображение*/
 #adItem div:nth-child(1) div:nth-child(3){
     margin-top: 6px;
-    border: 1px solid #68717c;
     width: 332px;
     height: 250px;
+}
+#emptyAd{
+    background: url("src/EmptyAd.png");
 }
 /**Телефон*/
 #adItem div:nth-child(2) div:nth-child(1){
     padding-left: 25px;
-    background: url("phone.png") center left no-repeat;
+    background: url("src/phone.png") center left no-repeat;
     margin-top: 5px;
 
     font-family: SourceSansPro;
@@ -65,7 +66,7 @@
 /**Город*/
 #adItem div:nth-child(2) div:nth-child(2){
     padding-left: 25px;
-    background: url("maps.png") center left no-repeat;
+    background: url("src/maps.png") center left no-repeat;
     margin-top: 14px;
 
     font-family: SourceSansPro;
@@ -100,7 +101,7 @@
     color: #2d74da;
 }
 #adItem > div:nth-child(3):hover{
-    cursor: pointer;
+    cursor: not-allowed;
     background: #2d74da;
     color: #ffffff;
 }

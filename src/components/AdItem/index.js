@@ -16,15 +16,20 @@ class AdItem extends Component {
         });
     };
 
-    render() {
+    /**функция редактирования объявления*/
+    onEdit = () => {};
 
+    render() {
         const {data} = this.props;//принимаем объект объявления из AdList
         const output_sub_title =<div>{data.subTitle}</div>;
         const output_text_area =<div>{data.textArea}</div>;
-        const output_image_data =<div>{data.imageData}</div>;
+        const output_image_data = (data.imageData)?//Если нет прикреплённого изображения вставляем дефолтное
+            <div>{data.imageData}</div>
+            :
+            <div id={'emptyAd'}> </div>;
         const output_phone_number =<div>{data.phoneNumber}</div>;
         const output_city =<div>{data.city}</div>;
-        const output_update = <div>Редактировать</div>;
+        const output_update = <div  onClick={this.onEdit}>Редактировать</div>;
         const output_delete = <div onClick={this.onDelete}>Удалить</div>;
 
             return (

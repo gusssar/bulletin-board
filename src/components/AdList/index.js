@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './index.css';
 import AdItem from '../AdItem/index';
 
 class AdList extends Component {
@@ -14,7 +13,6 @@ class AdList extends Component {
 
 
     render() {
-    // const {addNewAd} = this.props;//приходит время нового объявления
     /**если state.delItem меняется, то удаляем по ключу из local.storage*/
     localStorage.removeItem(this.state.delItem.toString());
 

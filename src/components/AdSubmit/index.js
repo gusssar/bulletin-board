@@ -16,36 +16,29 @@ class AdSubmit extends Component {
     };
 
 
-    onSubTitleChange = event => {this.setState({subTitle: event.target.value}); /*console.log('---onSubTitleChange---')*/};
-    onTextAreaChange = event => {this.setState({textArea: event.target.value}); /*console.log('---onTextAreaChange---')*/};
-    onPhoneNumberChange = (event) => {
-        // console.log('event.target.value---',event.target.value);
-        // console.log('event.target.value.length---',event.target.value.length);
-        // console.log('event.target.value[5]---',event.target.value[4]);
+    onSubTitleChange = event => this.setState({subTitle: event.target.value});
+    onTextAreaChange = event => this.setState({textArea: event.target.value});
 
+    onPhoneNumberChange = (event) => {
         /**Проверка на ввод цифр, если isNaN, удаляем знак
          * состоит из 4-х блоков из-за присутсвия '+',' ','(',')','-'*/
         for (let i=4; i<7; i++){
             if (isNaN(event.target.value[i])){
-                // console.log('Не число!!!');
                 event.target.value = event.target.value.substring(0,i);
             }
         }
         for (let i=9; i<12; i++){
             if (isNaN(event.target.value[i])){
-                // console.log('Не число!!!');
                 event.target.value = event.target.value.substring(0,i);
             }
         }
         for (let i=13; i<15; i++){
             if (isNaN(event.target.value[i])){
-                // console.log('Не число!!!');
                 event.target.value = event.target.value.substring(0,i);
             }
         }
         for (let i=16; i<18; i++){
             if (isNaN(event.target.value[i])){
-                // console.log('Не число!!!');
                 event.target.value = event.target.value.substring(0,i);
             }
         }
@@ -61,14 +54,11 @@ class AdSubmit extends Component {
             const first       = /\+7\s\(\d{3}/;
 
             if (this.state.phoneNumber.search(full)+1){
-                // console.log('---аеее---');
-
             }else
                 if(this.state.phoneNumber.search(third)+1){
                     if (this.state.phoneNumber.search(third_done)+1){}
                         else
                             {this.setState({phoneNumber: this.state.phoneNumber +'-'},() => {
-                                // console.log('this.state.phoneNumber.3',this.state.phoneNumber)
                                 });
                             }
                 } else
@@ -76,17 +66,14 @@ class AdSubmit extends Component {
                         if (this.state.phoneNumber.search(second_done)+1){}
                             else
                                 {this.setState({phoneNumber: this.state.phoneNumber +'-'},() => {
-                                     // console.log('this.state.phoneNumber.2',this.state.phoneNumber)
                                 });
                                 }
                     } else
                         if (this.state.phoneNumber.search(first)+1){
                             if (this.state.phoneNumber.search(first_done)+1){
-                                // console.log('this.state.phoneNumber.search(first_done)+1');
                             }
                                 else
                                             {this.setState({phoneNumber: this.state.phoneNumber +') '},() => {
-                                                // console.log('this.state.phoneNumber.1',this.state.phoneNumber)
                                             });
                                             }
 
@@ -95,32 +82,41 @@ class AdSubmit extends Component {
     };
 
     onCityChange = event => this.setState({city: event.target.value});
-    onImageDataChange = event => this.setState({imageData: event.target.value});
+
+    /**Загрузка и обработка изображения*
+     * необходимо доработать передачу reader.result в state.imageData*/
+    onImageDataChange = event => {
+        const reader = new FileReader();
+            reader.readAsDataURL(event.target.files[0]);
+            reader.addEventListener('load',function () {
+                // this.setState({imageData:reader.result}) //выдаёт ошибку TypeError: this.setState is not a function at FileReader
+            });
+
+    };
+
 
     onBlurSubTitleChange = () => this.setState({onBlurSubTitle: 1});
     onFocusSubTitleChange = () => this.setState({onBlurSubTitle: ''});
+    /**управление расфокусом inputPhone*/
     onBlurPhoneNumberChange = () => {
         const full = /\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}/;
         const empty = /^\+7\s\($/;
                 if (this.state.phoneNumber.search(full)+1){
                     this.setState({onBlurPhoneNumber: 2});
-                    // console.log('onBlurPhoneNumber: 2')
                 } else {
                     if (this.state.phoneNumber.search(empty)+1){
                         this.setState({phoneNumber: ''});
                         this.setState({onBlurPhoneNumber: 0});
-                        // console.log('onBlurPhoneNumber: 0')
                     } else {
                         this.setState({onBlurPhoneNumber: 1});
-                        // console.log('onBlurPhoneNumber: 1')
                     }
                 }
 
     };
 
+    /**управление фокусировкой inputPhone*/
     onFocusPhoneNumberChange = () => {
             this.setState({onBlurPhoneNumber: 3});
-            // console.log('this.state.phoneNumber--',this.state.phoneNumber);
             if(!this.state.phoneNumber){
                 this.setState({phoneNumber: '+7 ('});
             }
@@ -137,8 +133,7 @@ class AdSubmit extends Component {
 
             if (stateSubTitle!==''&&statePhoneNumber!==0){
                 this.setState({emptyTitle:'',emptyPhone:''});//всё заполнено
-                console.log(this.state);
-                localStorage.setItem(time,JSON.stringify(this.state));
+                localStorage.setItem(time,JSON.stringify(this.state));//записываем объект state в local.storage под ключом 'new Date().getTime().toString()'
                 this.props.updateData(this.state.submitTime);
             }else {
                 if (stateSubTitle!==''&&statePhoneNumber===0){
@@ -151,14 +146,7 @@ class AdSubmit extends Component {
                                 this.setState({emptyTitle:'1',emptyPhone:'1'});//ничего не заполненно
                             }
             }
-            console.log(this.state);
-            // localStorage.setItem(time,JSON.stringify(this.state));
-            //     console.log('localStorage---',localStorage);
-            /**передача в AdList*/
-            // this.props.updateData(this.state.submitTime);
         });
-
-
     };
 
     render() {
@@ -183,10 +171,11 @@ class AdSubmit extends Component {
                             <div>Не более 140 символов</div>
                         </div>;
 
-        const style_input = (this.state.emptyTitle)?{marginTop: '8px', border: '1px solid #fa5e5b'}:{marginTop: '8px'};
+        const style_input = (this.state.emptyTitle)? //добавление border при пустом значении input
+            {marginTop: '8px', border: '1px solid #fa5e5b'}:
+            {marginTop: '8px'};
         const input_sub_title = <div className={'input-sub-title'}>
                 <div style={{marginTop: '24px'}}>Заголовок</div>
-
                 <input type='text' className='sub-title' value={this.state.subTitle}
                        maxLength={140}  style={style_input}
                        onChange={this.onSubTitleChange}
@@ -196,7 +185,6 @@ class AdSubmit extends Component {
                 {sub_title_descrip}
             </div>;
 
-        // console.log('---input_text_area---');
         const input_text_area =
             <div className={'input-sub-title'}>
                 <div style={{marginTop: '29px'}}>Текст объявления</div>
@@ -205,10 +193,8 @@ class AdSubmit extends Component {
                 <div id={'text-area-decrip'}>
                     <div>Не более 300 символов</div>
                 </div>
-
             </div>;
 
-        // console.log('---input_phone---');
         /**Проверка валидности Телефона*/
         const phone_descrip =
             (this.state.onBlurPhoneNumber)?
@@ -226,7 +212,9 @@ class AdSubmit extends Component {
                 <div>Обзятельное поле</div>
             </div>;
 
-        const style_phone = (this.state.emptyPhone)?{marginTop: '8px', border: '1px solid #fa5e5b'}:{marginTop: '8px'};
+        const style_phone = (this.state.emptyPhone)?//добавление border при пустом значении input
+            {marginTop: '8px', border: '1px solid #fa5e5b'}:
+            {marginTop: '8px'};
         const input_phone =
             <div className={'input-sub-title'}>
                 <div style={{marginTop: '29px'}}>Телефон</div>
@@ -241,49 +229,34 @@ class AdSubmit extends Component {
                 {phone_descrip}
             </div>;
 
-        /**подумать как реализовать выбор города из массива*/
-        // const city_arr = [  '',
-        //                     'Москва',
-        //                     'Санкт-Петербург',
-        //                     'Новосибирск',
-        //                     'Екатеринбург',
-        //                     'Нижний Новгород',
-        //                     'Казань',
-        //                     'Челябинск',
-        //                     'Омск',
-        //                     'Самара',
-        //                     'Ростов-на-Дону',
-        //                     'Уфа',
-        //                     'Красноярск',
-        //                     'Пермь',
-        //                     'Воронеж',
-        //                     'Волгоград'];
-
-
-        // console.log('---input_city---');
+        /**выбор города из массива*/
         const input_city =
             <div className={'input-sub-title'}>
                 <div style={{marginTop: '28px'}}>Город</div>
                 <select name='input-city' style={{marginTop: '12px'}} onChange={this.onCityChange}>
-                    {/*этого тут не должно быть*/}
                     <option value='неизвестно'> </option>
                     <option value='Москва'>Москва</option>
                     <option value='Санкт-петербург'>Санкт-петербург</option>
-                    <option value='Новосибирск'>Новосибирск</option>
+                    <option value='Гагарин'>Гагарин</option>
                 </select>
             </div>;
 
         /**разобраться как сохранять картинку в local.storage*/
-        // console.log('---input_image---');
+        const previewImg = (this.state.imageData)?//при данных в state.imageData будет preview изображение
+          <img src={localStorage.getItem('Image')} alt={'изображение объявления'}
+                 style={{position:'absolute', width:'69px',height:'52px', left:'200px'}}/>:
+            <img  alt={'изображение объявления'} style={{position:'absolute', left:'200px', opacity:'0'}}/>;
+
         const input_image =
             <div className={'fake-input'}>
-                <div style={{marginTop: '32px'}}><div className={'fake-input-div'}>Прикрепить фото</div></div>
+                <div style={{marginTop: '32px', position:'relative'}}>
+                    {previewImg}
+                    <div className={'fake-input-div'}>Прикрепить фото</div></div>
                 <input id='image' type='file' accept='image/*' name='input-photo'
                        value={this.state.imageData} onChange={this.onImageDataChange}/>
             </div>;
 
-        // console.log('---input_btn---');
-        const btn = <button onClick={this.onSubmit} onChange={this.onTime}  style={{marginTop: '32px'}}>Подать</button>  ;
+        const btn = <button onClick={this.onSubmit} style={{marginTop: '32px'}}>Подать</button> ;
 
 
         return (
