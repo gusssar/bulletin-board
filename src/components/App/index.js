@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from '../../logo.svg';
 import './index.css';
 import AdSubmit from '../AdSubmit/index.js';
 import AdList from '../AdList/index.js';
