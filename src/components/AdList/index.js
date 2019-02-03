@@ -4,45 +4,39 @@ import AdItem from '../AdItem/index';
 
 class AdList extends Component {
 
+    state ={
+        delItem: 0
+    };
+
+    changeDataList = (value) => {
+        this.setState({delItem:value});
+    };
+
+
     render() {
+    // const {addNewAd} = this.props;//приходит время нового объявления
+    /**если state.delItem меняется, то удаляем по ключу из local.storage*/
+    localStorage.removeItem(this.state.delItem.toString());
 
-
-    const {addNewAd} = this.props;//приходит время нового объявления
-
-    // console.log('const {addNewAd}---',addNewAd);
-
-            let time = JSON.parse(localStorage
-                .getItem(this.props.addNewAd.toString()));//достаём новый оъект из localStorage
-            // console.log('JSON.parse',time);
-            // console.log('localStorage',localStorage);
-
-            let data =[];
-
-            /**Ищем в localStorage все объявления и записываем их в массив (новый в начало)*/
-            for (let key in localStorage){
-                if(localStorage.getItem(key)){
-                    data.unshift(localStorage.getItem(key))}
-            }
-
-
-
-            // console.log('JSON.parse(data[0] after unshift',JSON.parse(data[0]));
+        let data =[];
+        /**Ищем в localStorage все объявления и записываем их в массив (новый в начало)*/
+        for (let key in localStorage){
+            if(localStorage.getItem(key)){
+                data.unshift(localStorage.getItem(key))}
+        }
 
             /**Раскладываем кажжый элемент массива в отдельные шаблоны компонентов AdItem*/
             const dataAdItem = data.map((data,index) =>
                 <div key={index}>
-                    {/*{JSON.parse(data).submitTime}*/}
-                    {<AdItem data = {JSON.parse(data)}/>}
+                    {<AdItem data = {JSON.parse(data)} changeDataList={this.changeDataList}/>}
                 </div>
             );
 
-            // console.log('dataAdItem',dataAdItem);
-
-            return (
-                <div>
-                    {dataAdItem}
-                </div>
-            );
+                return (
+                    <div>
+                        {dataAdItem}
+                    </div>
+                );
 
     }
 }

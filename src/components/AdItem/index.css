@@ -99,6 +99,11 @@
     letter-spacing: normal;
     color: #2d74da;
 }
+#adItem > div:nth-child(3):hover{
+    cursor: pointer;
+    background: #2d74da;
+    color: #ffffff;
+}
 /**Удалить*/
 #adItem > div:nth-child(4){
     position: absolute;
@@ -120,4 +125,9 @@
     line-height: normal;
     letter-spacing: normal;
     color: #fa5e5b;
+}
+#adItem > div:nth-child(4):hover{
+    cursor: pointer;
+    background: #fa5e5b;
+    color: #ffffff;
 }

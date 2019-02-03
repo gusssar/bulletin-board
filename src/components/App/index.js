@@ -12,28 +12,23 @@ class App extends Component {
 
     addNewAd = (value) => {this.setState({addNewAd : value})};
 
-    onAddAd = () => {
+    // onAddAd = () => {
         // this.setState({submitTime: time});
         // console.log(this.state);
         // let serialState = JSON.stringify(this.state);
         // localStorage.setItem(time.toString(),JSON.stringify(this.state));
         // console.log(localStorage);
         // this.props.updateData(this.state.submitTime);
+    // };
 
-    };
-
-    onClear = () => {localStorage.clear()};
+    // onClear = () => {localStorage.clear()};
 
     render() {
-
-
     return (
         <div style={{width:614, margin: '48px auto'}}>
           <AdSubmit updateData = {this.addNewAd}/>
-            {/*<div style={{height:'50px'}}> </div>*/}
             <div className={'title-app'}>Объявление</div>
-            {/*<div style={{height:'50px'}}> </div>*/}
-            <button onClick={this.onClear}>Clear</button>
+            {/*<button onClick={this.onClear}>Clear</button>*/}
           <AdList addNewAd = {this.state.addNewAd}/>
         </div>
     );
