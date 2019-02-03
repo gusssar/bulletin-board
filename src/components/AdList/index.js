@@ -22,6 +22,7 @@ class AdList extends Component {
             if(localStorage.getItem(key)){
                 data.unshift(localStorage.getItem(key))}
         }
+        data.sort().reverse(); //сортировка для корректного отоброжения в FireFox и Safari
 
             /**Раскладываем кажжый элемент массива в отдельные шаблоны компонентов AdItem*/
             const dataAdItem = data.map((data,index) =>
