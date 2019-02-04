@@ -135,6 +135,16 @@ class AdSubmit extends Component {
                 this.setState({emptyTitle:'',emptyPhone:''});//всё заполнено
                 localStorage.setItem(time,JSON.stringify(this.state));//записываем объект state в local.storage под ключом 'new Date().getTime().toString()'
                 this.props.updateData(this.state.submitTime);
+                    this.setState({submitTime:'', //очистка полей
+                    subTitle:'',
+                    textArea:'',
+                    phoneNumber: '',
+                    city: '',
+                    imageData: '',
+                    onBlurSubTitle:'',
+                    onBlurPhoneNumber:'',
+                    emptyTitle:'',
+                    emptyPhone:''});
             }else {
                 if (stateSubTitle!==''&&statePhoneNumber===0){
                     this.setState({emptyTitle:'',emptyPhone:'1'});//не заполнен телефон
@@ -257,7 +267,6 @@ class AdSubmit extends Component {
             </div>;
 
         const btn = <button onClick={this.onSubmit} style={{marginTop: '32px'}}>Подать</button> ;
-
 
         return (
             <div>
